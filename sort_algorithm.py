@@ -102,6 +102,35 @@ def hill_sort(data_list):
     return data_list
 
 
+def merge(list1, list2):
+    """
+    Merge two ordered lists into one list. The merged result should be ordered as well.
+    """
+    index_1, index_2 = 0, 0
+    result_list = []
+    while index_1 < len(list1) and index_2 < len(list2):
+        if list1[index_1] < list2[index_2]:
+            result_list += [list1[index_1]]
+            index_1 += 1
+        else:
+            result_list += [list2[index_2]]
+            index_2 += 1
+    # one of list1 and list2 may have remaining data. Only one list may have remaining data.
+    # Because the two lists are already ordered. So all the remaining data must be bigger than the data in result_list.
+    result_list += list1[index_1:]
+    result_list += list2[index_2:]
+    return result_list
+
+
+def merge_sort(data_list):
+    if len(data_list) < 2:
+        return data_list
+    split_index = len(data_list) // 2
+    left_list = merge_sort(data_list[:split_index])
+    right_list = merge_sort(data_list[split_index:])
+    return merge(left_list, right_list)
+
+
 if __name__ == '__main__':
     data_list = [3, 6, 4, 2, 11, 10, 5]
-    hill_sort(data_list)
+    print(merge_sort(data_list))
