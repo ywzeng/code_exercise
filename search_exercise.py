@@ -37,7 +37,7 @@ class HashTable(object):
         """ Insert the data into the hash table. The index of this data in the hash table is its hash value. """
         hash_value = self.hash(data)
         original_hash = hash_value
-        # Hash conflict. Namely if the hash address has already been used, move to next address.
+        # Hash Collision. Namely if the hash address has already been used, move to next address.
         while self.data_list[hash_value]:
             hash_value = (hash_value + 1) % self.size
             if self.data_list[hash_value] or hash_value == original_hash:
