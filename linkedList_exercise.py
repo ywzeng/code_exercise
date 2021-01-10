@@ -59,7 +59,7 @@ class SingleLinkedList(object):
             self.__head = temp_node
         else:
             current_node = self.__head
-            while current_node is not None:
+            while current_node.next is not None:
                 current_node = current_node.next
             current_node.next = temp_node
 
@@ -113,12 +113,25 @@ class SingleLinkedList(object):
             index += 1
         return -1
 
+    def reverse_linked_list(self):
+        """ Reverse this linked list. """
+        if self.__head is None or self.__head.next is None:
+            return self.__head
+        prior_node, next_node = None, None
+        current = self.__head
+        while current:
+            next_node = current.next        # Record the next node of current node.
+            current.next = prior_node       # Reverse the point. Namely let the next node of the current node be its original prior node.
+            prior_node = current            # Move the index to the next node.
+            current = next_node             # Move the index to the next node.
+        return prior_node       # Finally, the prior_node indicates the final node of the original Linked List.
+
 
 class DoubleLinkedNode(object):
     """
     The node of the double linked list.
     """
-    def __int__(self, data):
+    def __init__(self, data):
         self.data = data
         self.prior = None
         self.next = None
@@ -223,3 +236,10 @@ class DoubleLinkedList(object):
             current_index += 1
             current_node = current_node.next
         return -1
+
+if __name__ == '__main__':
+    a = DoubleLinkedList()
+    a.add(0)
+    a.append(1)
+    a.append(3)
+    print(a.traverse())
