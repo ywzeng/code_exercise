@@ -10,7 +10,7 @@ class Solution:
     def back_track(self, nums: list, track_list: list) -> None:
         # Already parsed all the numbers.
         if len(track_list) == len(nums):
-            temp_list = [i for i in track_list]     # shallow copy
+            temp_list = [i for i in track_list]     # deep copy
             self.result_list += [temp_list]
             return
         
