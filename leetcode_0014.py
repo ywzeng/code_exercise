@@ -1,5 +1,29 @@
-class Solution:
+class Solution_better:
     def longestCommonPrefix(self, strs: List[str]) -> str:
+        """
+        Non-recursion method. 
+        Use the first string as the pattern to scan other strings.
+        If not matched, modify the pattern to its [:-1] (namely remove the last character), and then rescan other strings.
+        The final modified pattern is the longest common prefix.
+        """
+        if not strs:
+            return ''
+        if len(strs) == 1:
+            return strs[0]
+        
+        result_str = strs[0]
+        i = 1
+        while i < len(strs):
+            if strs[i][:len(result_str)] != result_str:
+                result_str = result_str[:-1]
+            else:
+                i += 1
+        return result_str
+
+
+class Solution_stupid:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        """ Recursion method. """
         if not strs:
             return ''
         
