@@ -1,8 +1,10 @@
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
         """
@@ -24,6 +26,6 @@ class Solution:
         if prior_node:
             prior_node.next = slow_p.next if slow_p.next else None
             slow_p.next = None
-        else:       # The slow pointer point has not moved, keeping pointing to the head .
+        else:       # The slow pointer has not moved, keeping pointing to the head .
             head = head.next
         return head
