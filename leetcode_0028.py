@@ -1,4 +1,4 @@
-class Solution:
+class Solution_double_pointer:
     def strStr(self, haystack: str, needle: str) -> int:
         if not needle:
             return 0
