@@ -1,4 +1,27 @@
-class Solution_stack_method:
+class Solution_DP:
+    def longestValidParentheses(self, s: str) -> int:
+        """ 
+        The length of two matched parentheses is 2.
+        DP
+        dp[i] represents the longest valid parentheses number at s[i].
+        If s[i] is '(', dp[i] = 0.
+        If s[i] is ')' and s[i-1] is '(', dp[i] = dp[i-2] + 2.
+        If s[i] is ')', s[i-1] is ')', and s[i-dp[i-1]-1] is '(', then dp[i] = dp[i-1] + dp[i-dp[i-1]-2] + 2 if there are elements before (i-dp[i-1]-2), namely i-dp[i-1]-2 should >= 0, otherwise dp[i] = dp[i-1] + 2.
+        """
+        if len(s) < 2:
+            return 0
+        dp = [0] * len(s)
+        for i in range(1, len(s)):
+            if s[i] == ')':
+                if s[i-1] == '(':
+                    dp[i] = dp[i-2] + 2
+                # s[i-1] is ')' as well.
+                elif i-dp[i-1] > 0 and s[i-dp[i-1]-1] == '(':
+                    dp[i] = dp[i-1] + dp[i-dp[i-1]-2] + 2 if i - dp[i-1] >= 2 else dp[i-1] + 2
+        return max(dp)
+
+
+class Solution_Stack:
     def longestValidParentheses(self, s: str) -> int:
         if len(s) < 2:
             return 0
