@@ -1,5 +1,30 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        """ Scan the matrix only one time. """
+        from collections import Counter
+        rows_map = [Counter() for i in range(9)]
+        cols_map = [Counter() for i in range(9)]
+        subsquare_map = [Counter() for i in range(9)]
+
+        # Scan the matrix.
+        for i in range(9):      #  Row
+            for j in range(9):      # Col
+                subsquare_index = (i // 3) * 3 + j // 3
+                # Only consider the valid digits.
+                current_digit = board[i][j]
+                if current_digit != '.':
+                    rows_map[i][current_digit] += 1
+                    cols_map[j][current_digit] += 1
+                    subsquare_map[subsquare_index][current_digit] += 1
+
+                    if rows_map[i][current_digit] > 1 or cols_map[j][current_digit] > 1 or subsquare_map[subsquare_index][current_digit] > 1:
+                        return False
+        return True
+
+
 class Solution_stupid:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
+        """ Scan the matrix three times. """
         from collections import Counter
         # Scan rows.
         for row in board:
