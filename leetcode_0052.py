@@ -16,21 +16,20 @@ class Solution_stupid:
                     return False
             return True
 
-        def back_track(board: list, row: int, result_list: list) -> None:
+        def back_track(board: list, row: int, result_num: int) -> None:
             if row == len(board):
-                temp_list = [''.join(temp_row) for temp_row in board]
-                result_list += [temp_list]
-                return
+                result_num += 1
+                return result_num
             
             for col in range(len(board[row])):
                 if not is_valid(board, row, col):
                     continue
                 
                 board[row][col] = 'Q'
-                back_track(board, row+1, result_list)
+                result_num = back_track(board, row+1, result_num)
                 board[row][col] = '.'
+            return result_num
         
         board = [['.' for i in range(n)] for i in range(n)]
-        result_list = []
-        back_track(board, 0, result_list)
-        return len(result_list)
+        result_num = back_track(board, 0, 0)
+        return result_num
