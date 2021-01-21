@@ -1,4 +1,16 @@
-class Solution_stupid_hash_map:
+class Solution_sort_key:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        item_dict = {}      # key is the sorted str, value is the item list.
+        for item in strs:
+            sorted_str = ''.join(sorted(item))      # sorted() return a list.
+            if sorted_str in item_dict:
+                item_dict[sorted_str] += [item]
+            else:
+                item_dict[sorted_str] = [item]
+        return list(item_dict.values())
+
+
+class Solution_hash_map:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         from collections import Counter
         hash_map_list = []
