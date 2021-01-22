@@ -1,5 +1,6 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # Sort is important in this question, making the left_index of current item is always lower or equal to its next item.
         intervals = sorted(intervals, key=lambda item: item[0], reverse=False)
         merge_list = [intervals[0]]
         for i in range(1, len(intervals)):
