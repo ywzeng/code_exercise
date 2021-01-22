@@ -1,13 +1,15 @@
-class Solution_stupid:
+class Solution:
     def getPermutation(self, n: int, k: int) -> str:
+        from math import factorial
         def back_track(n: int, track_list: list, result_list: list, k: int) -> bool:
             if len(track_list) == n:
-                result_list += [''.join([str(d) for d in track_list])]
+                temp_list = [d for d in track_list]
+                result_list += [temp_list]
                 if len(result_list) == k:
                     return True
                 else:
                     return False
-            
+
             for i in range(1, n+1):
                 if i in track_list:
                     continue
@@ -18,6 +20,14 @@ class Solution_stupid:
                 track_list.pop()
             return False
         
-        track_list, result_list = [], []
-        back_track(n, track_list, result_list, k)
-        return result_list[-1]          
+        # Pre-calculate the sub-tree index of the k-th leaf node.
+        start_index = 0
+        for i in range(1, n):
+            if factorial(n-1)*i >= k:
+                break
+            start_index += 1
+
+        track_list = [start_index+1] if start_index > 0 else []
+        result_list = []
+        back_track(n, track_list, result_list, k-factorial(n-1)*start_index)
+        return ''.join([str(d) for d in result_list[-1]])
