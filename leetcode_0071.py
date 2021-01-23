@@ -1,4 +1,15 @@
-class Solution:
+class Solution_clever:
+    def simplifyPath(self, path: str) -> str:
+        stack = []
+        for sub_path in path.split('/'):
+            if sub_path not in ['', '.', '..']:
+                stack += [sub_path]
+            elif sub_path == '..' and stack:
+                stack.pop()
+        return '/' + '/'.join(stack)
+
+
+class Solution_normal:
     def simplifyPath(self, path: str) -> str:
         if path[-1] != '/':
             path += '/'
