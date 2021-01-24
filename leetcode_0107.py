@@ -12,9 +12,8 @@ class Solution:
         result_list = []
         queue = [root]
         while queue:
-            poped_node_list = []
-            while queue:
-                poped_node_list += [queue.pop(0)]
+            poped_node_list = queue[:]
+            queue = []
             for i, poped_node in enumerate(poped_node_list):
                 if poped_node.left:
                     queue += [poped_node.left]
@@ -22,4 +21,4 @@ class Solution:
                     queue += [poped_node.right]
                 poped_node_list[i] = poped_node.val
             result_list += [poped_node_list]
-        return result_list[::-1]   
+        return result_list[::-1]
