@@ -1,4 +1,4 @@
-class Solution_stupid:
+class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         """ 
         Combination. 
@@ -11,9 +11,7 @@ class Solution_stupid:
                 result_list += [track_list[:]]
                 return
             
-            for i in range(1, n+1):
-                if i < current_num:
-                    continue
+            for i in range(current_num, n+1):
                 track_list += [i]
                 back_track(n, i+1, k, track_list, result_list)
                 track_list.pop()
