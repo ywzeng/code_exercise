@@ -8,27 +8,17 @@ class Solution:
         if not head or not head.next:
             return head
         
-        prior_node, left = None, head
-        while left.next:
+        fake_root = ListNode()
+        fake_root.next = head
+        left = head
+        prior = fake_root
+        while left and left.next:
             right = left.next
             if right.val != left.val:
-                prior_node = left
-                left = right
+                prior, left = left, right
             else:
-                while left.val == right.val:
-                    if right.next:
-                        right = right.next
-                    else:
-                        if prior_node:
-                            prior_node.next = None
-                            return head
-                        else:
-                            head = None
-                            return head
-                # Skip the redudant nodes.
-                if prior_node:
-                    prior_node.next = right
-                else:
-                    head = right
+                while right and right.val == left.val:
+                    right = right.next
+                prior.next = right
                 left = right
-        return head         
+        return fake_root.next
