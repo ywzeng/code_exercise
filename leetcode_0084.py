@@ -1,11 +1,11 @@
-class Solution_Monotonic_Stack_with_Sentinel:
+class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
         """
         Monotonic stack with sentinel.
         Add two sentinels into the initial heights list as the border.
         Stack records the index of the elements in heights list.
         """
-        heights = [0] + heights + [0]       # The leftmost '0' makes sure that
+        heights = [0] + heights + [0]       # The leftmost '0' makes sure that heights[i] < heights[stack[-1]] is always be True.
         max_area = 0
         stack = [0]     # The sentinels guarantees the non-empty of the list.
 
@@ -58,7 +58,7 @@ class Solution_stupid_enum_width_timeout:
                 max_area = max(max_area, (right-left+1)*min_height)
         return max_area
 
-    
+
 class Solution_stupid_enum_height_timeout:
     def largestRectangleArea(self, heights: List[int]) -> int:
         max_area = 0
