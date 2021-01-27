@@ -48,7 +48,6 @@ class Solution_Monotonic_Stack:
         return max_area
 
 
-
 class Solution_stupid_enum_width_timeout:
     def largestRectangleArea(self, heights: List[int]) -> int:
         max_area = 0
