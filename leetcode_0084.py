@@ -1,3 +1,24 @@
+class Solution_Monotonic_Stack_with_Sentinel:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        """
+        Monotonic stack with sentinel.
+        Add two sentinels into the initial heights list as the border.
+        Stack records the index of the elements in heights list.
+        """
+        heights = [0] + heights + [0]       # The leftmost '0' makes sure that
+        max_area = 0
+        stack = [0]     # The sentinels guarantees the non-empty of the list.
+
+        for i in range(1, len(heights)):
+            while heights[i] < heights[stack[-1]]:
+                poped_height = heights[stack.pop()]
+                width = i - stack[-1] - 1
+                max_area = max(max_area, poped_height * width)
+            stack += [i]
+        
+        return max_area
+
+
 class Solution_Monotonic_Stack:
     def largestRectangleArea(self, heights: List[int]) -> int:
         """ Monotonic stack. """
