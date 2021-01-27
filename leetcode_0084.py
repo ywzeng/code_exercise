@@ -1,3 +1,33 @@
+class Solution_Monotonic_Stack:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        """ Monotonic stack. """
+        if not heights:
+            return 0
+        if len(heights) == 1:
+            return heights[0]
+        
+        max_area = 0
+        stack = []
+        for i in range(len(heights)):
+            # Compare current height with the height of the stack-top element.
+            while stack and heights[i] < heights[stack[-1]]:
+                poped_height = heights[stack.pop()]
+                while stack and poped_height == heights[stack[-1]]:
+                    stack.pop()
+                width = i if not stack else i-stack[-1]-1
+                max_area = max(max_area, poped_height*width)
+            stack += [i]
+        while stack:
+            poped_height = heights[stack.pop()]
+            while stack and poped_height == heights[stack[-1]]:
+                stack.pop()
+            width = len(heights) if not stack else len(heights)-stack[-1]-1
+            max_area = max(max_area, poped_height*width)
+        
+        return max_area
+
+
+
 class Solution_stupid_enum_width_timeout:
     def largestRectangleArea(self, heights: List[int]) -> int:
         max_area = 0
