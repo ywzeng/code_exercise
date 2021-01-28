@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class Solution_check_sub_tree:
     def isValidBST(self, root: TreeNode) -> bool:
         """
         Get the greatest node, l_greatest, in its left sub-tree, and the greatest node, r_smallest, in its right sub-tree.
@@ -29,3 +29,23 @@ class Solution:
                 r_greatest = r_greatest if r_greatest else root.val
                 return True, l_smallest, r_greatest
         return check_bst(root)[0]
+    
+
+class Solution_middle_order_traverse:
+    def isValidBST(self, root: TreeNode) -> bool:
+        """ The middle order traverse of a BST is asscending. """
+        def middle_traverse(root: TreeNode, result_list: list) -> None:
+            if not root:
+                return None
+            
+            middle_traverse(root.left, result_list)
+            result_list += [root.val]
+            middle_traverse(root.right, result_list)
+        result_list = []
+        middle_traverse(root, result_list)
+        if len(result_list) < 2:
+            return True
+        for i in range(1, len(result_list)):
+            if result_list[i] <= result_list[i-1]:
+                return False
+        return True
