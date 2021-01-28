@@ -1,3 +1,17 @@
+class Solution_better:
+    def maxProfit(self, prices: List[int]) -> int:
+        """ Still DP, but no need to explicitly maintaining a list. """
+        min_buying_price = prices[0]
+        max_profit = 0
+        for i in range(1, len(prices)):
+            if prices[i-1] < min_buying_price:
+                min_buying_price = prices[i-1]
+            temp_profit = prices[i]-min_buying_price
+            if temp_profit > max_profit:
+                max_profit = temp_profit
+        return max_profit
+
+    
 class Solution_DP:
     def maxProfit(self, prices: List[int]) -> int:
         """
