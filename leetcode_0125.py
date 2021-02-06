@@ -1,3 +1,9 @@
+class Solution_Clever:
+    def isPalindrome(self, s: str) -> bool:
+        s = ''.join([c for c in list(s) if c.isalnum()]).lower()
+        return s == s[::-1]
+
+    
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         """ Double pointers. """
