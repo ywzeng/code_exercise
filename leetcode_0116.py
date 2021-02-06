@@ -8,7 +8,21 @@ class Node:
         self.next = next
 """
 
-class Solution:
+
+class Solution_Recursion:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root or not root.left:
+            return root
+        root.left.next = root.right
+        if root.next:
+            root.right.next = root.next.left
+        # Recursively process the left and right sub-tree.
+        self.connect(root.left)
+        self.connect(root.right)
+        return root
+
+    
+class Solution_Layer_Traverse:
     def connect(self, root: 'Node') -> 'Node':
         """ Layer Traverse. """
         if not root:
