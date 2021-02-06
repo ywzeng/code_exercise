@@ -9,6 +9,25 @@ class Node:
 """
 
 
+class Solution_O1_Space:
+    def connect(self, root: 'Node') -> 'Node':
+        # First connect the nodes in current layer. Then connect the right with next.left.
+        if not root:
+            return
+
+        temp_root = root
+        while root.left:
+            next_layer_node = root.left
+            while root.next:
+                root.left.next = root.right
+                root.right.next = root.next.left
+                root = root.next
+            # The last node in this layer. Connect its sub-nodes.
+            root.left.next = root.right
+            root = next_layer_node
+        return temp_root
+
+
 class Solution_Recursion:
     def connect(self, root: 'Node') -> 'Node':
         if not root or not root.left:
