@@ -8,7 +8,35 @@ class Node:
         self.next = next
 """
 
-class Solution:
+class Solution_O1_Space:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return
+        if root.left:
+            if root.right:
+                root.left.next = root.right
+            else:
+                root.left.next = self.get_next(root.next)
+        if root.right:
+            root.right.next = self.get_next(root.next)
+        # Recursively parse the left and right sub-tree.
+        # Parse the right sub-tree first.
+        # Because connecting the next of root.left need to iteratively get the sub-nodes of root.next.
+        self.connect(root.right)
+        self.connect(root.left)
+        return root
+    
+    def get_next(self, root: 'None') -> 'Node':
+        while root:
+            if root.left:
+                return root.left
+            if root.right:
+                return root.right
+            root = root.next
+        return None
+
+
+class Solution_Queue:
     def connect(self, root: 'Node') -> 'Node':
         if not root:
             return
