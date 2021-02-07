@@ -6,7 +6,7 @@
 #         self.right = right
 
 
-class Solution:
+class Solution_Recursion:
     def sumNumbers(self, root: TreeNode) -> int:
         def get_node_sum(cur_node: TreeNode, node_sum: int) -> int:
             if not cur_node:
@@ -20,7 +20,7 @@ class Solution:
         return get_node_sum(root, 0)       
 
 
-class Solution:
+class Solution_Back_Track:
     def sumNumbers(self, root: TreeNode) -> int:
         def back_track(current_node: TreeNode, track_list: list, result_num: int) -> int:
             # Stop condition.
