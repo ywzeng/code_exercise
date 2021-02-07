@@ -4,6 +4,22 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        def get_node_sum(cur_node: TreeNode, node_sum: int) -> int:
+            if not cur_node:
+                return 0
+            node_sum = node_sum * 10 + cur_node.val
+            # Leaf node.
+            if not cur_node.left and not cur_node.right:
+                return node_sum
+            return get_node_sum(cur_node.left, node_sum) + get_node_sum(cur_node.right, node_sum)
+
+        return get_node_sum(root, 0)       
+
+
 class Solution:
     def sumNumbers(self, root: TreeNode) -> int:
         def back_track(current_node: TreeNode, track_list: list, result_num: int) -> int:
