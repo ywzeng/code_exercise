@@ -1,4 +1,12 @@
-class Solution:
+class Solution_Math:
+    def addDigits(self, num: int) -> int:
+        if num == 0:
+            return 0
+        else:
+            return num%9 if num%9 != 0 else 9
+
+        
+class Solution_Stupid:
     def addDigits(self, num: int) -> int:
         if num < 10:
             return num
