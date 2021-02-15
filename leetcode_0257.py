@@ -4,6 +4,29 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+class Solution_Back_Track:
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        def back_track(root: TreeNode, track_list: list, result_list: list) -> None:
+            if not root.left and not root.right:
+                result_list += ['->'.join(track_list)]
+                return
+            else:
+                if root.left:
+                    track_list += [str(root.left.val)]
+                    back_track(root.left, track_list, result_list)
+                    track_list.pop()
+                if root.right:
+                    track_list += [str(root.right.val)]
+                    back_track(root.right, track_list, result_list)
+                    track_list.pop()
+
+        if not root:
+            return []
+        track_list, result_list = [str(root.val)], []
+        back_track(root, track_list, result_list)
+        return result_list
+
+    
 class Solution_Recursion:
     def binaryTreePaths(self, root: TreeNode) -> List[str]:
         if not root:
