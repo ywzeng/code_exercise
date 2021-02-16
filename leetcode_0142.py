@@ -4,7 +4,18 @@
 #         self.val = x
 #         self.next = None
 
-class Solution:
+class Solution_Hash_Map:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        node_dict = {}
+        p = head
+        while p:
+            if p in node_dict:
+                return p
+            node_dict[p] = 1
+            p = p.next
+        return
+
+class Solution_Double_Pointers:
     def detectCycle(self, head: ListNode) -> ListNode:
         """
         Double pointers.
